@@ -22,6 +22,8 @@ namespace rpg_console
             PhysicalAttack = physicalAttack;
             PhysicalDefense = physicalDefense;
         }
+        public abstract int UsePhysicalAttack();
+        public abstract int UseMagicalPower();
     }
 
 
