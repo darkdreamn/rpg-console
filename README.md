@@ -45,3 +45,20 @@ Ataque mágico: 4</br>
 Defesa física: 3</br>
 Ataque físico: 5</br>
 Habilidade: Após realizar um ataque físico por 5x seu próximo ataque é um especial mágico de +7 para todos os personagens do jogador</br>
+
+### Telas
+Escolha de personagens
+
+![Escolha de personagens](/images/chooseCharacters1.JPG)
+
+Personagens escolhidos
+
+![Personagens escolhidos](/images/chooseCharacters2.JPG)
+
+Combate - ataque do jogador
+
+![Jogador](/images/combat1.JPG)
+
+Combate - ataque da cpu
+
+![Cpu](/images/combat2.JPG)
