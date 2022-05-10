@@ -61,7 +61,7 @@ namespace rpg_console
         public override int UsePhysicalAttack()
         {
             special++;
-            Console.WriteLine("Garras afiadas ///");
+            Console.WriteLine("Garras afiadas");
             return PhysicalAttack;
         }
         public override int UseMagicalPower()
