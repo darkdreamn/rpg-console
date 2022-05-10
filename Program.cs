@@ -1,6 +1,4 @@
-﻿using System;
-using static System.Console;
-namespace rpg_console.entities
+﻿namespace rpg_console.entities
 {
     class Program
     {

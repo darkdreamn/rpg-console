@@ -23,8 +23,8 @@ namespace rpg_console
         public override int UseMagicalPower()
         {
             MagicalPoints = 0;
-            Random randon = new Random();
-            int power = randon.Next(2);
+            Random random = new Random();
+            int power = random.Next(3);
             Console.WriteLine("Espada da Aurora! +" + power);
             return MagicalAttack + power;
         }

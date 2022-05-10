@@ -25,6 +25,4 @@ namespace rpg_console
         public abstract int UsePhysicalAttack();
         public abstract int UseMagicalPower();
     }
-
-
 }

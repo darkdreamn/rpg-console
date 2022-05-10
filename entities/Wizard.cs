@@ -8,24 +8,18 @@ namespace rpg_console
         { }
         public override int UsePhysicalAttack()
         {
-            if (HealthPoints < 7)
-            {
-                // Console.WriteLine("Ataque de Espada +1");
-                return PhysicalAttack + 1;
-            }
-            else
-            {
-                // Console.WriteLine("Ataque de Espada");
-                return PhysicalAttack;
-            }
+            Console.WriteLine("Golpe de cajado");
+            return PhysicalAttack;
         }
         public override int UseMagicalPower()
         {
-            // MagicalPoints = 0;
-            // Random randon = new Random();
-            // int power = randon.Next(2);
-            // Console.WriteLine("Espada da Aurora! +" + power);
+            Console.WriteLine("Raio Poderoso");
             return MagicalAttack;
+        }
+        public void UseMagicalCure(string target) 
+        {            
+            Console.WriteLine("Cura Mágica +4 para " + target);
+            MagicalPoints = 0;
         }
     }
 }
