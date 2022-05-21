@@ -3,6 +3,7 @@ namespace rpg_console
     public abstract class Character
     {
         public bool Active { get; set; }
+        public string Name { get; set; }
         public int Level { get; set; }
         public int HealthPoints { get; set; }
         public int MagicalPoints { get; set; }
@@ -11,9 +12,10 @@ namespace rpg_console
         public int PhysicalDefense { get; set; }
         public int PhysicalAttack { get; set; }
 
-        public Character(bool active, int level, int healthPoints, int magicalPoints, int magicalDefense, int magicalAttack, int physicalDefense, int physicalAttack)
+        public Character(bool active, string name, int level, int healthPoints, int magicalPoints, int magicalDefense, int magicalAttack, int physicalDefense, int physicalAttack)
         {
             Active = active;
+            Name = name;
             Level = level;
             HealthPoints = healthPoints;
             MagicalPoints = magicalPoints;

@@ -4,8 +4,8 @@ namespace rpg_console
     public class Boss : Character
     {
         int special = 1;
-        public Boss(bool active, int level, int healthPoints, int magicalPoints, int magicalDefense, int magicalAttack, int physicalDefense, int physicalAttack) :
-        base(active, level, healthPoints, magicalPoints, magicalDefense, magicalAttack, physicalDefense, physicalAttack)
+        public Boss(bool active, string name, int level, int healthPoints, int magicalPoints, int magicalDefense, int magicalAttack, int physicalDefense, int physicalAttack) :
+        base(active, name, level, healthPoints, magicalPoints, magicalDefense, magicalAttack, physicalDefense, physicalAttack)
         { }
         public int ChooseAction()
         {
@@ -61,18 +61,18 @@ namespace rpg_console
         public override int UsePhysicalAttack()
         {
             special++;
-            Console.WriteLine("Garras afiadas");
+            Console.WriteLine("Garras Afiadas");
             return PhysicalAttack;
         }
         public override int UseMagicalPower()
         {
-            Console.WriteLine("Bola de fogo");
+            Console.WriteLine("Bola de Fogo");
             return MagicalAttack;
         }
         public void UseSpecialAttack()
         {
             special++;
-            Console.WriteLine("Ataque especial! Grande destruição!");
+            Console.WriteLine("Ataque especial! Grande Destruição!");
         }
     }
 }

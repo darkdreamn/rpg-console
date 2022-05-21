@@ -5,12 +5,17 @@ namespace rpg_console
 {
     public class Game
     {
-        Hero hero = new Hero(false, 9, 15, 2, 2, 3, 3, 4);
-        Knight knight = new Knight(false, 11, 19, 0, 0, 0, 4, 5);
-        Wizard wizard = new Wizard(false, 10, 24, 3, 3, 4, 1, 1);
-        Boss boss = new Boss(true, 18, 60, 4, 2, 4, 3, 5);
+        Hero hero = new Hero(false, "hero", 9, 15, 2, 2, 3, 3, 4);
+        Knight knight = new Knight(false, "knight", 11, 19, 0, 0, 0, 4, 5);
+        Wizard wizard = new Wizard(false, "wizard", 10, 24, 3, 3, 4, 1, 1);
+        Boss boss = new Boss(true, "boss", 18, 60, 4, 2, 4, 3, 5);
+        Character[] characters = new Character[4];
         public void Start()
         {
+            characters[0] = hero;
+            characters[1] = knight;
+            characters[2] = wizard;
+            characters[3] = boss;
             int playerA = 0;
             int playerB = 0;
 
@@ -18,22 +23,18 @@ namespace rpg_console
             Clear();
             Combat();
         }
-        public void PrintCharacters(int playerA, int playerB)
+        public void PrintCharacters<T>(T character, int playerA, int playerB, int i) where T : Character
         {
-            WriteLine((playerA == 1 || playerB == 1) ? "\n[X] HERÓI" : "\n[1] HERÓI");
-            Write($"    HP:{hero.HealthPoints}  MP:{hero.MagicalPoints}");
-            Write($"  | AT.M:{hero.MagicalAttack}  AT.F:{hero.PhysicalAttack}");
-            WriteLine($"  | DEF.M:{hero.MagicalDefense}  DEF.F:{hero.PhysicalDefense}");
-
-            WriteLine((playerA == 2 || playerB == 2) ? "\n[X] CAVALEIRO" : "\n[2] CAVALEIRO");
-            Write($"    HP:{knight.HealthPoints}  MP:{knight.MagicalPoints}");
-            Write($"  | AT.M:{knight.MagicalAttack}  AT.F:{knight.PhysicalAttack}");
-            WriteLine($"  | DEF.M:{knight.MagicalDefense}  DEF.F:{knight.PhysicalDefense}");
-
-            WriteLine((playerA == 3 || playerB == 3) ? "\n[X] MAGO" : "\n[3] MAGO");
-            Write($"    HP:{wizard.HealthPoints}  MP:{wizard.MagicalPoints}");
-            Write($"  | AT.M:{wizard.MagicalAttack}  AT.F:{wizard.PhysicalAttack}");
-            WriteLine($"  | DEF.M:{wizard.MagicalDefense}  DEF.F:{wizard.PhysicalDefense}");
+            i++;
+            switch (i)
+            {
+                case 1: WriteLine(character.Active ? "\n[X] HERÓI" : "\n[1] HERÓI"); break;
+                case 2: WriteLine(character.Active ? "\n[X] CAVALEIRO" : "\n[2] CAVALEIRO"); break;
+                case 3: WriteLine(character.Active ? "\n[X] MAGO" : "\n[3] MAGO"); break;
+            }
+            Write($"    HP:{character.HealthPoints}  MP:{character.MagicalPoints}");
+            Write($"  | AT.M:{character.MagicalAttack}  AT.F:{character.PhysicalAttack}");
+            WriteLine($"  | DEF.M:{character.MagicalDefense}  DEF.F:{character.PhysicalDefense}");
         }
         public void ChooseCharacter(ref int playerA, ref int playerB)
         {
@@ -45,7 +46,8 @@ namespace rpg_console
                 Clear();
                 WriteLine($"{UNDERLINE}Personagens{RESET}\n");
                 WriteLine(selected == 0 ? "Escolha o primeiro personagem: " : "Escolha o segundo personagem: ");
-                PrintCharacters(playerA, playerB);
+                for (int i = 0; i < 3; i++)
+                    PrintCharacters(characters[i], playerA, playerB, i);
 
                 try
                 {
@@ -85,7 +87,8 @@ namespace rpg_console
             Clear();
             WriteLine($"{UNDERLINE}Personagens{RESET}\n");
             WriteLine("Personagens confirmados!");
-            PrintCharacters(playerA, playerB);
+            for (int i = 0; i < 3; i++)
+                PrintCharacters(characters[i], playerA, playerB, i);
             WriteLine("\n[Enter] para continuar");
             ReadKey();
         }
@@ -117,56 +120,29 @@ namespace rpg_console
             ResetColor();
             WriteLine();
         }
-        public void PrintStatusHero(bool turn)
+        public void PrintStatusPlayer<T>(T character, bool turn) where T : Character
         {
+            string name = "";
+
             ForegroundColor = ConsoleColor.DarkYellow;
             Write(turn ? "[*] " : "[ ] ");
             ResetColor();
             ForegroundColor = ConsoleColor.Blue;
-            Write($"HERÓI >\t\t");
+
+            switch (character.Name)
+            {
+                case "hero": name = "HERÓI"; break;
+                case "knight": name = "CAVALEIRO"; break;
+                case "wizard": name = "MAGO"; break;
+            }
+            Write($"{name} >\t\t");
             ResetColor();
             ForegroundColor = ConsoleColor.Green;
-            Write($"HP:{hero.HealthPoints}");
+            Write($"HP:{character.HealthPoints}");
             ResetColor();
-            Write($"  MP:{hero.MagicalPoints}");
-            Write($"  | AT.M:{hero.MagicalAttack}  AT.F:{hero.PhysicalAttack}");
-            WriteLine($"  | DEF.M:{hero.MagicalDefense}  DEF.F:{hero.PhysicalDefense}");
-            ForegroundColor = ConsoleColor.Blue;
-            WriteLine("    ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-            ResetColor();
-        }
-        public void PrintStatusKnight(bool turn)
-        {
-            ForegroundColor = ConsoleColor.DarkYellow;
-            Write(turn ? "[*] " : "[ ] ");
-            ResetColor();
-            ForegroundColor = ConsoleColor.Blue;
-            Write($"CAVALEIRO >\t\t");
-            ResetColor();
-            ForegroundColor = ConsoleColor.Green;
-            Write($"HP:{knight.HealthPoints}");
-            ResetColor();
-            Write($"  MP:{knight.MagicalPoints}");
-            Write($"  | AT.M:{knight.MagicalAttack}  AT.F:{knight.PhysicalAttack}");
-            WriteLine($"  | DEF.M:{knight.MagicalDefense}  DEF.F:{knight.PhysicalDefense}");
-            ForegroundColor = ConsoleColor.Blue;
-            WriteLine("    ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-            ResetColor();
-        }
-        public void PrintStatusWizard(bool turn)
-        {
-            ForegroundColor = ConsoleColor.DarkYellow;
-            Write(turn ? "[*] " : "[ ] ");
-            ResetColor();
-            ForegroundColor = ConsoleColor.Blue;
-            Write($"MAGO >\t\t");
-            ResetColor();
-            ForegroundColor = ConsoleColor.Green;
-            Write($"HP:{wizard.HealthPoints}");
-            ResetColor();
-            Write($"  MP:{wizard.MagicalPoints}");
-            Write($"  | AT.M:{wizard.MagicalAttack}  AT.F:{wizard.PhysicalAttack}");
-            WriteLine($"  | DEF.M:{wizard.MagicalDefense}  DEF.F:{wizard.PhysicalDefense}");
+            Write($"  MP:{character.MagicalPoints}");
+            Write($"  | AT.M:{character.MagicalAttack}  AT.F:{character.PhysicalAttack}");
+            WriteLine($"  | DEF.M:{character.MagicalDefense}  DEF.F:{character.PhysicalDefense}");
             ForegroundColor = ConsoleColor.Blue;
             WriteLine("    ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
             ResetColor();
@@ -181,23 +157,23 @@ namespace rpg_console
         public void HeroPrintStatusGroup()
         {
             if (knight.Active)
-                PrintStatusKnight(false);
+                PrintStatusPlayer(knight, false);
             else if (wizard.Active)
-                PrintStatusWizard(false);
+                PrintStatusPlayer(wizard, false);
         }
         public void KnightPrintStatusGroup()
         {
             if (hero.Active)
-                PrintStatusHero(false);
+                PrintStatusPlayer(hero, false);
             else if (wizard.Active)
-                PrintStatusWizard(false);
+                PrintStatusPlayer(wizard, false);
         }
         public void WizardPrintStatusGroup()
         {
             if (hero.Active)
-                PrintStatusHero(false);
+                PrintStatusPlayer(hero, false);
             else if (knight.Active)
-                PrintStatusKnight(false);
+                PrintStatusPlayer(knight, false);
         }
         public void Combat()
         {
@@ -215,8 +191,7 @@ namespace rpg_console
                     do
                     {
                         TitleCombat(false);
-                        PrintStatusHero(true);
-
+                        PrintStatusPlayer(hero, true);
                         HeroPrintStatusGroup();
                         WriteLine("Escolha a ação:");
 
@@ -227,7 +202,7 @@ namespace rpg_console
 
                         Clear();
                         TitleCombat(false);
-                        PrintStatusHero(true);
+                        PrintStatusPlayer(hero, true);
                         HeroPrintStatusGroup();
 
                         if (value == "1")
@@ -296,7 +271,7 @@ namespace rpg_console
                     do
                     {
                         TitleCombat(false);
-                        PrintStatusKnight(true);
+                        PrintStatusPlayer(knight, true);
                         KnightPrintStatusGroup();
 
                         WriteLine("Escolha a ação:");
@@ -306,7 +281,7 @@ namespace rpg_console
 
                         Clear();
                         TitleCombat(false);
-                        PrintStatusKnight(true);
+                        PrintStatusPlayer(knight, true);
                         KnightPrintStatusGroup();
                         if (value == "1")
                         {
@@ -353,7 +328,7 @@ namespace rpg_console
                     do
                     {
                         TitleCombat(false);
-                        PrintStatusWizard(true);
+                        PrintStatusPlayer(wizard, true);
                         WizardPrintStatusGroup();
                         WriteLine("Escolha a ação:");
 
@@ -365,7 +340,7 @@ namespace rpg_console
 
                         Clear();
                         TitleCombat(false);
-                        PrintStatusWizard(true);
+                        PrintStatusPlayer(wizard, true);
                         WizardPrintStatusGroup();
 
                         if (value == "1")
@@ -478,11 +453,11 @@ namespace rpg_console
                             switch (boss.ChooseTarget(hero, knight, wizard))
                             {
                                 case 0:
-                                    PrintStatusHero(false);
+                                    PrintStatusPlayer(hero, false);
                                     if (knight.Active)
-                                        PrintStatusKnight(false);
+                                        PrintStatusPlayer(knight, false);
                                     if (wizard.Active)
-                                        PrintStatusWizard(false);
+                                        PrintStatusPlayer(wizard, false);
 
                                     Write("Herói recebe: ");
                                     damage = boss.UsePhysicalAttack();
@@ -498,11 +473,11 @@ namespace rpg_console
                                         WriteLine("Sem dano");
                                     break;
                                 case 1:
-                                    PrintStatusKnight(false);
+                                    PrintStatusPlayer(knight, false);
                                     if (hero.Active)
-                                        PrintStatusHero(false);
+                                        PrintStatusPlayer(hero, false);
                                     if (wizard.Active)
-                                        PrintStatusWizard(false);
+                                        PrintStatusPlayer(wizard, false);
 
                                     Write("Cavaleiro recebe: ");
                                     damage = boss.UsePhysicalAttack();
@@ -525,11 +500,11 @@ namespace rpg_console
                                         WriteLine("Sem dano");
                                     break;
                                 case 2:
-                                    PrintStatusWizard(false);
+                                    PrintStatusPlayer(wizard, false);
                                     if (hero.Active)
-                                        PrintStatusHero(false);
+                                        PrintStatusPlayer(hero, false);
                                     if (knight.Active)
-                                        PrintStatusKnight(false);
+                                        PrintStatusPlayer(knight, false);
 
                                     Write("Mago recebe: ");
                                     damage = boss.UsePhysicalAttack();
@@ -550,11 +525,11 @@ namespace rpg_console
                             switch (boss.ChooseTarget(hero, knight, wizard))
                             {
                                 case 0:
-                                    PrintStatusHero(false);
+                                    PrintStatusPlayer(hero, false);
                                     if (knight.Active)
-                                        PrintStatusKnight(false);
+                                        PrintStatusPlayer(knight, false);
                                     if (wizard.Active)
-                                        PrintStatusWizard(false);
+                                        PrintStatusPlayer(wizard, false);
 
                                     Write("Herói recebe: ");
                                     damage = boss.UseMagicalPower();
@@ -570,11 +545,11 @@ namespace rpg_console
                                         WriteLine("Sem dano");
                                     break;
                                 case 1:
-                                    PrintStatusKnight(false);
+                                    PrintStatusPlayer(knight, false);
                                     if (hero.Active)
-                                        PrintStatusHero(false);
+                                        PrintStatusPlayer(hero, false);
                                     if (wizard.Active)
-                                        PrintStatusWizard(false);
+                                        PrintStatusPlayer(wizard, false);
 
                                     Write("Cavaleiro recebe: ");
                                     damage = boss.UseMagicalPower();
@@ -597,11 +572,11 @@ namespace rpg_console
                                         WriteLine("Sem dano");
                                     break;
                                 case 2:
-                                    PrintStatusWizard(false);
+                                    PrintStatusPlayer(wizard, false);
                                     if (hero.Active)
-                                        PrintStatusHero(false);
+                                        PrintStatusPlayer(hero, false);
                                     if (knight.Active)
-                                        PrintStatusKnight(false);
+                                        PrintStatusPlayer(knight, false);
 
                                     Write("Mago recebe: ");
                                     damage = boss.UseMagicalPower();
@@ -620,11 +595,11 @@ namespace rpg_console
                             break;
                         case 2:
                             if (hero.Active)
-                                PrintStatusHero(false);
+                                PrintStatusPlayer(hero, false);
                             if (knight.Active)
-                                PrintStatusKnight(false);
+                                PrintStatusPlayer(knight, false);
                             if (wizard.Active)
-                                PrintStatusWizard(false);
+                                PrintStatusPlayer(wizard, false);
 
                             boss.UseSpecialAttack();
                             if (hero.Active)
