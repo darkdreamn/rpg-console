@@ -5,7 +5,6 @@ C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\bin\Debug\net5.0\r
 C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\bin\Debug\net5.0\rpg-console.dll
 C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\bin\Debug\net5.0\ref\rpg-console.dll
 C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\bin\Debug\net5.0\rpg-console.pdb
-C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\obj\Debug\net5.0\rpg-console.csprojAssemblyReference.cache
 C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\obj\Debug\net5.0\rpg-console.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\obj\Debug\net5.0\rpg-console.AssemblyInfoInputs.cache
 C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\obj\Debug\net5.0\rpg-console.AssemblyInfo.cs
@@ -14,3 +13,4 @@ C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\obj\Debug\net5.0\r
 C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\obj\Debug\net5.0\ref\rpg-console.dll
 C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\obj\Debug\net5.0\rpg-console.pdb
 C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\obj\Debug\net5.0\rpg-console.genruntimeconfig.cache
+C:\Users\Lord Dark\Desktop\bootcamp web\workspace\rpg-console\obj\Debug\net5.0\rpg-console.csproj.AssemblyReference.cache
