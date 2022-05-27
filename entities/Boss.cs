@@ -1,7 +1,7 @@
 using System;
 namespace rpg_console
 {
-    public class Boss : Character
+    public class Boss : Characters
     {
         int special = 1;
         public Boss(bool active, string name, int level, int healthPoints, int magicalPoints, int magicalDefense, int magicalAttack, int physicalDefense, int physicalAttack) :

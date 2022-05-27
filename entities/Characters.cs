@@ -1,6 +1,6 @@
 namespace rpg_console
 {
-    public abstract class Character
+    public abstract class Characters
     {
         public bool Active { get; set; }
         public string Name { get; set; }
@@ -12,7 +12,7 @@ namespace rpg_console
         public int PhysicalDefense { get; set; }
         public int PhysicalAttack { get; set; }
 
-        public Character(bool active, string name, int level, int healthPoints, int magicalPoints, int magicalDefense, int magicalAttack, int physicalDefense, int physicalAttack)
+        public Characters(bool active, string name, int level, int healthPoints, int magicalPoints, int magicalDefense, int magicalAttack, int physicalDefense, int physicalAttack)
         {
             Active = active;
             Name = name;

@@ -2,7 +2,7 @@ using System;
 
 namespace rpg_console
 {
-    public class Hero : Character
+    public class Hero : Characters
     {
         public Hero(bool active, string name, int level, int healthPoints, int magicalPoints, int magicalDefense, int magicalAttack, int physicalDefense, int physicalAttack) :
         base(active, name, level, healthPoints, magicalPoints, magicalDefense, magicalAttack, physicalDefense, physicalAttack)

@@ -9,34 +9,34 @@ namespace rpg_console
         Knight knight = new Knight(false, "knight", 11, 19, 0, 0, 0, 4, 5);
         Wizard wizard = new Wizard(false, "wizard", 10, 24, 3, 3, 4, 1, 1);
         Boss boss = new Boss(true, "boss", 18, 60, 4, 2, 4, 3, 5);
-        Character[] characters = new Character[4];
+        Characters[] Characters = new Characters[4];
         public void Start()
         {
-            characters[0] = hero;
-            characters[1] = knight;
-            characters[2] = wizard;
-            characters[3] = boss;
+            Characters[0] = hero;
+            Characters[1] = knight;
+            Characters[2] = wizard;
+            Characters[3] = boss;
             int playerA = 0;
             int playerB = 0;
 
-            ChooseCharacter(ref playerA, ref playerB);
+            ChooseCharacters(ref playerA, ref playerB);
             Clear();
             Combat();
         }
-        public void PrintCharacters<T>(T character, int playerA, int playerB, int i) where T : Character
+        public void PrintCharacters<T>(T Characters, int i) where T : Characters
         {
             i++;
             switch (i)
             {
-                case 1: WriteLine(character.Active ? "\n[X] HERÓI" : "\n[1] HERÓI"); break;
-                case 2: WriteLine(character.Active ? "\n[X] CAVALEIRO" : "\n[2] CAVALEIRO"); break;
-                case 3: WriteLine(character.Active ? "\n[X] MAGO" : "\n[3] MAGO"); break;
+                case 1: WriteLine(Characters.Active ? "\n[X] HERÓI" : "\n[1] HERÓI"); break;
+                case 2: WriteLine(Characters.Active ? "\n[X] CAVALEIRO" : "\n[2] CAVALEIRO"); break;
+                case 3: WriteLine(Characters.Active ? "\n[X] MAGO" : "\n[3] MAGO"); break;
             }
-            Write($"    HP:{character.HealthPoints}  MP:{character.MagicalPoints}");
-            Write($"  | AT.M:{character.MagicalAttack}  AT.F:{character.PhysicalAttack}");
-            WriteLine($"  | DEF.M:{character.MagicalDefense}  DEF.F:{character.PhysicalDefense}");
+            Write($"    HP:{Characters.HealthPoints}  MP:{Characters.MagicalPoints}");
+            Write($"  | AT.M:{Characters.MagicalAttack}  AT.F:{Characters.PhysicalAttack}");
+            WriteLine($"  | DEF.M:{Characters.MagicalDefense}  DEF.F:{Characters.PhysicalDefense}");
         }
-        public void ChooseCharacter(ref int playerA, ref int playerB)
+        public void ChooseCharacters(ref int playerA, ref int playerB)
         {
             const string UNDERLINE = "\x1B[4m";
             const string RESET = "\x1B[0m";
@@ -47,7 +47,7 @@ namespace rpg_console
                 WriteLine($"{UNDERLINE}Personagens{RESET}\n");
                 WriteLine(selected == 0 ? "Escolha o primeiro personagem: " : "Escolha o segundo personagem: ");
                 for (int i = 0; i < 3; i++)
-                    PrintCharacters(characters[i], playerA, playerB, i);
+                    PrintCharacters(Characters[i], i);
 
                 try
                 {
@@ -56,13 +56,13 @@ namespace rpg_console
                     {
                         if (playerA == 0)
                         {
-                            SetCharacter(value);
+                            SetCharacters(value);
                             playerA = value;
                             selected++;
                         }
                         else if (playerA != value)
                         {
-                            SetCharacter(value);
+                            SetCharacters(value);
                             playerB = value;
                             selected++;
                         }
@@ -88,11 +88,11 @@ namespace rpg_console
             WriteLine($"{UNDERLINE}Personagens{RESET}\n");
             WriteLine("Personagens confirmados!");
             for (int i = 0; i < 3; i++)
-                PrintCharacters(characters[i], playerA, playerB, i);
+                PrintCharacters(Characters[i], i);
             WriteLine("\n[Enter] para continuar");
             ReadKey();
         }
-        public void SetCharacter(int value)
+        public void SetCharacters(int value)
         {
             switch (value)
             {
@@ -120,7 +120,7 @@ namespace rpg_console
             ResetColor();
             WriteLine();
         }
-        public void PrintStatusPlayer<T>(T character, bool turn) where T : Character
+        public void PrintStatusPlayer<T>(T Characters, bool turn) where T : Characters
         {
             string name = "";
 
@@ -129,7 +129,7 @@ namespace rpg_console
             ResetColor();
             ForegroundColor = ConsoleColor.Blue;
 
-            switch (character.Name)
+            switch (Characters.Name)
             {
                 case "hero": name = "HERÓI"; break;
                 case "knight": name = "CAVALEIRO"; break;
@@ -138,11 +138,11 @@ namespace rpg_console
             Write($"{name} >\t\t");
             ResetColor();
             ForegroundColor = ConsoleColor.Green;
-            Write($"HP:{character.HealthPoints}");
+            Write($"HP:{Characters.HealthPoints}");
             ResetColor();
-            Write($"  MP:{character.MagicalPoints}");
-            Write($"  | AT.M:{character.MagicalAttack}  AT.F:{character.PhysicalAttack}");
-            WriteLine($"  | DEF.M:{character.MagicalDefense}  DEF.F:{character.PhysicalDefense}");
+            Write($"  MP:{Characters.MagicalPoints}");
+            Write($"  | AT.M:{Characters.MagicalAttack}  AT.F:{Characters.PhysicalAttack}");
+            WriteLine($"  | DEF.M:{Characters.MagicalDefense}  DEF.F:{Characters.PhysicalDefense}");
             ForegroundColor = ConsoleColor.Blue;
             WriteLine("    ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
             ResetColor();

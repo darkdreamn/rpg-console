@@ -49,11 +49,11 @@ Habilidade: Após realizar um ataque físico por 5x seu próximo ataque é um es
 ### Telas
 Escolha de personagens
 
-![Escolha de personagens](/images/chooseCharacters1.JPG)
+![Escolha de personagens](/images/chooseCharacterss1.JPG)
 
 Personagens escolhidos
 
-![Personagens escolhidos](/images/chooseCharacters2.JPG)
+![Personagens escolhidos](/images/chooseCharacterss2.JPG)
 
 Combate - ataque do jogador
 
